@@ -7,33 +7,23 @@ console.log("JWT SECRET:", process.env.JWT_SECRET);
 
 const app = express();
 
-// Allowed deployed frontend URLs
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://task-manager-neon-gamma.vercel.app"
-];
+const cors = require("cors");
 
-// CORS FIX (Render compatible)
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // allow mobile apps / curl / Postman (no origin)
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      } else {
-        return callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: [
+      "http://localhost:3000",
+      "https://task-manager-neon-gamma.vercel.app"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
-    methods: "GET,POST,PUT,DELETE,OPTIONS",
-    allowedHeaders: "Content-Type,Authorization",
   })
 );
 
-// Handle preflight
+// handle preflight requests
 app.options("*", cors());
+
 
 app.use(express.json());
 
