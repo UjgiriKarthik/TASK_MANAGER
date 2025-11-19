@@ -1,0 +1,134 @@
+:root {
+  --card: #ffffff;
+  --accent: #6C9BCF;
+  --accent-dark: #527eaa;
+  --pending: #f7c873;
+  --in-progress: #76b5c5;
+  --completed: #85c88a;
+  --text: #2c343a;
+  --text-light: #7b7f86;
+  --radius: 14px;
+  --shadow: 0 6px 18px rgba(108,155,207,0.10), 0 2px 6px rgba(44,52,64,0.05);
+}
+
+.tasklist-container {
+  width: 100%;
+}
+
+.no-task {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 15px;
+  margin-top: 20px;
+}
+
+.tasklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-card {
+  background: var(--card);
+  margin-bottom: 18px;
+  padding: 18px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.task-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(108,155,207,0.16);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.task-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.task-status {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: white;
+}
+
+/* Color-coded status tags */
+.task-status.pending {
+  background: var(--pending);
+}
+
+.task-status.in-progress {
+  background: var(--in-progress);
+}
+
+.task-status.completed {
+  background: var(--completed);
+}
+
+.task-desc {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.task-by {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.task-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Buttons */
+.btn {
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.small-btn {
+  padding: 7px 10px;
+}
+
+.edit-btn {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 4px 12px rgba(108,155,207,0.25);
+}
+
+.edit-btn:hover {
+  background: var(--accent-dark);
+}
+
+.delete-btn {
+  background: #e96060;
+  color: white;
+  box-shadow: 0 4px 12px rgba(233,96,96,0.25);
+}
+
+.delete-btn:hover {
+  background: #d94d4d;
+}
+
+.no-actions {
+  height: 32px;
+}
