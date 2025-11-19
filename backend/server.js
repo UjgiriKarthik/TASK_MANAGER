@@ -1,10 +1,18 @@
 require('dotenv').config();
+console.log("JWT SECRET:", process.env.JWT_SECRET);
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "https://task-manager-neon-gamma.vercel.app"
+  ],
+  credentials: true
+}));
+
 app.use(express.json());
 
 connectDB(process.env.MONGO_URI);
@@ -18,4 +26,4 @@ app.get('/', (req, res) => res.send('Task Manager API'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-console.log("JWT SECRET:", process.env.JWT_SECRET);
+
