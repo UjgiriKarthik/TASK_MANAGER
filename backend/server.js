@@ -7,8 +7,7 @@ console.log("JWT SECRET:", process.env.JWT_SECRET);
 
 const app = express();
 
-const cors = require("cors");
-
+// CORS
 app.use(
   cors({
     origin: [
@@ -21,13 +20,12 @@ app.use(
   })
 );
 
-// handle preflight requests
 app.options("*", cors());
 
-
+// middleware
 app.use(express.json());
 
-// Connect MongoDB
+// Connect DB
 connectDB(process.env.MONGO_URI);
 
 // Routes
