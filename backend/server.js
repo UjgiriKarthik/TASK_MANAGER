@@ -1,43 +1,45 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const connectDB = require('./config/db');
-
-console.log("JWT SECRET:", process.env.JWT_SECRET);
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const connectDB = require("./config/db");
 
 const app = express();
 
-// CORS
+
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://task-manager-neon-gamma.vercel.app"
+];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "https://task-manager-eyaw.onrender.com",
-      "https://task-manager-9zmx9z15l-ujgirikarthiks-projects.vercel.app"
-    ],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
 
+app.options("*", cors());
 
 
-// middleware
 app.use(express.json());
 
-// Connect DB
+
 connectDB(process.env.MONGO_URI);
 
-// Routes
-app.use('/api', require('./routes/auth'));
-app.use('/api/tasks', require('./routes/tasks'));
+app.use("/api", require("./routes/auth"));
+app.use("/api/tasks", require("./routes/tasks"));
 
-// Base route
-app.get('/', (req, res) => {
-  res.send('Task Manager API Running...');
+app.get("/", (req, res) => {
+  res.send("Task Manager API Running");
 });
 
-// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
