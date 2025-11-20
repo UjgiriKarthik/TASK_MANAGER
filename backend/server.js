@@ -12,13 +12,15 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://task-manager-eyaw.onrender.com"
+      "https://task-manager-eyaw.onrender.com",
+      "https://task-manager-9zmx9z15l-ujgirikarthiks-projects.vercel.app"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
+
 
 
 // middleware
